@@ -9,22 +9,44 @@ order: 5
 
 When you work with an AI coding assistant (Claude Code, JetBrains Junie) in a project that uses oi-laravel-attachments, the assistant benefits from knowing how the package is meant to be used — that models opt in with `HasAttachments`, that uploads go through the action classes, and that model classes should be resolved via `OiLaravelAttachments`.
 
-The package ships a canonical skill file that communicates this context, plus a script that syncs it into the assistant skill directories.
+The package ships a canonical skill file that communicates this context, plus an Artisan command that installs it into your application.
 
-## Syncing the skill
+## Installing the skill
 
-Run the Composer script once after adding the package:
+Run the Artisan command once after adding the package:
 
 ```bash
-composer sync-ai-skills
+php artisan oi:install-ai-skill
 ```
 
 This copies the canonical stub at `resources/stubs/ai-skill.md` to:
 
-- `.claude/skills/oilab-laravel-attachments/skill.md` (Claude Code)
-- `.junie/skills/oilab-laravel-attachments/skill.md` (JetBrains Junie)
+- `.claude/skills/oilab-laravel-attachments/SKILL.md` (Claude Code)
+- `.junie/skills/oilab-laravel-attachments/SKILL.md` (JetBrains Junie)
 
-The sync also runs automatically on `post-autoload-dump`, so the skill files stay in step with the installed package version after every `composer install` / `composer update`.
+It also adds an `=== oi-lab/oi-laravel-attachments rules ===` section to your project's `CLAUDE.md` (creating the file if needed). Re-running the command refreshes that section in place rather than duplicating it.
+
+### Keeping it up to date automatically
+
+To refresh the skill whenever the package is updated, add the command to your application's `composer.json`:
+
+```json
+"scripts": {
+    "post-autoload-dump": [
+        "@php artisan oi:install-ai-skill --quiet"
+    ]
+}
+```
+
+### Publishing only the skill file
+
+If you only want the skill file without touching `CLAUDE.md`, publish it via the standard vendor publish mechanism:
+
+```bash
+php artisan vendor:publish --tag=oi-laravel-attachments-skill
+```
+
+> Note: `composer sync-ai-skills` is a **package-development** helper that syncs the stub into this package's own `.claude` / `.junie` directories. It must be run from inside the package repository — consuming applications should use `php artisan oi:install-ai-skill` instead.
 
 ## What the skill tells the assistant
 
@@ -37,4 +59,4 @@ The skill file instructs the assistant to:
 
 ## Customizing the skill
 
-The source of truth is `resources/stubs/ai-skill.md`. Edit it and re-run `composer sync-ai-skills` to propagate changes to both assistant directories. The generated `skill.md` files are overwritten on each sync, so make your edits in the stub, not the targets.
+The source of truth is `resources/stubs/ai-skill.md`. Edit it and re-run `php artisan oi:install-ai-skill` to propagate changes to both assistant directories. The generated `SKILL.md` files are overwritten on each run, so make your edits in the stub, not the targets.

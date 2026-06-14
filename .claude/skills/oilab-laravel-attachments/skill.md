@@ -103,8 +103,8 @@ Note: a sync of N files also fires N `FileAttached` events; `AttachUploadedFiles
 
 ## Updating the AI Skill
 
-After updating this package, re-sync the skill files:
+After updating this package, re-install the skill files:
 
 ```bash
-composer sync-ai-skills
+php artisan oi:install-ai-skill
 ```

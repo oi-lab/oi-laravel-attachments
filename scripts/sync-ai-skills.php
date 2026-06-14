@@ -8,8 +8,8 @@ $root = dirname(__DIR__);
 $stub = $root.'/resources/stubs/ai-skill.md';
 
 $targets = [
-    $root.'/.claude/skills/oilab-laravel-attachments/skill.md',
-    $root.'/.junie/skills/oilab-laravel-attachments/skill.md',
+    $root.'/.claude/skills/oilab-laravel-attachments/SKILL.md',
+    $root.'/.junie/skills/oilab-laravel-attachments/SKILL.md',
 ];
 
 if (! is_file($stub)) {

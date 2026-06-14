@@ -19,10 +19,11 @@ Initial release of OI Laravel Attachments — polymorphic file attachments, file
 - **Configurable Models**: Every model (`File`, `Folder`, `Attachment`, and the user model) is resolved through `OiLaravelAttachments` and can be swapped via config.
 - **Storage Agnostic**: Works with any Flysystem disk (local, S3, etc.); the disk and upload directory are configurable.
 - **UUIDs & Soft Deletes**: Files, folders, and attachments each carry a unique `uuid` (auto-generated via observers); files and folders are soft-deletable.
+- **AI Assistant Skills**: The `oi:install-ai-skill` Artisan command installs Claude Code / JetBrains Junie skill files and a `CLAUDE.md` rules section into the host application.
 
 ### Requirements
 - PHP 8.2, 8.3, or 8.4
 - Laravel 11.0+, 12.0+, or 13.0+
 
 ### Testing
-- 71 tests covering the attachment trait, models and relationships, sorting, upload actions, file metadata, audit tracking, events, and the configurable model resolver.
+- 75 tests covering the attachment trait, models and relationships, sorting, upload actions, file metadata, audit tracking, events, and the configurable model resolver.

@@ -280,7 +280,7 @@ All three tables carry a unique `uuid`, `created_by` / `updated_by` audit column
 
 ## Testing
 
-This package ships **71 tests** covering the attachment trait, models and relationships, sorting, upload actions, file metadata, audit tracking, and events.
+This package ships **75 tests** covering the attachment trait, models and relationships, sorting, upload actions, file metadata, audit tracking, and events.
 
 ```bash
 # Run all tests
@@ -296,13 +296,13 @@ vendor/bin/pest --coverage
 
 ## AI Assistant Skills
 
-This package ships a skill file that gives AI coding assistants (Claude Code, JetBrains Junie) context about how attachments work. Sync it into your project's skill directories with:
+This package ships a skill file that gives AI coding assistants (Claude Code, JetBrains Junie) context about how attachments work. Install it into your application with the Artisan command:
 
 ```bash
-composer sync-ai-skills
+php artisan oi:install-ai-skill
 ```
 
-This writes `.claude/skills/oilab-laravel-attachments/skill.md` and `.junie/skills/oilab-laravel-attachments/skill.md`. See the [documentation](docs/advanced/skills.md) for details.
+This writes `.claude/skills/oilab-laravel-attachments/SKILL.md` and `.junie/skills/oilab-laravel-attachments/SKILL.md`, and adds an `oi-lab/oi-laravel-attachments` rules section to your project's `CLAUDE.md`. See the [documentation](docs/advanced/skills.md) for details.
 
 ## Contributing
 
