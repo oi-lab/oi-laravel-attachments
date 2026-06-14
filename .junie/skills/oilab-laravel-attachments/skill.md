@@ -86,8 +86,13 @@ Each action dispatches an event in `OiLab\OiLaravelAttachments\Events`. Listen t
 | `FileDetached` | `detachFile()` removes attachments (count > 0) | `$attachable`, `$fileId`, `$collection`, `$count` |
 | `AttachmentsSynced` | `syncAttachments()` replaces a collection | `$attachable`, `$collection`, `$fileIds` |
 | `AttachmentsReordered` | `reorderAttachments()` updates sort | `$attachable`, `$collection`, `$order` |
+| `AttachmentCreated` / `AttachmentUpdated` / `AttachmentDeleted` | Model-level Attachment lifecycle (via `AttachmentObserver`) | `$attachment` |
+| `FileCreated` / `FileUpdated` / `FileDeleted` / `FileRestored` | File lifecycle (via `FileObserver`) | `$file` |
+| `FileMoved` | A file's `folder_id` changes | `$file`, `$fromFolderId`, `$toFolderId` |
+| `FolderCreated` / `FolderUpdated` / `FolderDeleted` / `FolderRestored` | Folder lifecycle (via `FolderObserver`) | `$folder` |
+| `FolderMoved` | A folder's `parent_id` changes | `$folder`, `$fromParentId`, `$toParentId` |
 
-Note: a sync of N files also fires N `FileAttached` events; `AttachUploadedFiles` fires one `FileStored` and one `FileAttached` per file. In tests, fake only the package events (`Event::fake([FileAttached::class, ...])`) so the UUID observers keep running.
+Note: a sync of N files also fires N `FileAttached` events; `AttachUploadedFiles` fires one `FileStored` and one `FileAttached` per file; storing an upload fires both `FileCreated` and `FileStored`; `FileMoved`/`FolderMoved` fire alongside `FileUpdated`/`FolderUpdated`. The trait's bulk operations use query builder writes, so `detachFile`/`syncAttachments`/`reorderAttachments` do NOT fire the model-level `AttachmentDeleted`/`AttachmentUpdated` events (they emit `FileDetached`/`AttachmentsSynced`/`AttachmentsReordered` instead). In tests, fake only the package events (`Event::fake([FileAttached::class, ...])`) so the UUID observers keep running.
 
 ## Conventions
 

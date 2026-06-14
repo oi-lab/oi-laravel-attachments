@@ -1,6 +1,6 @@
 <img src="./assets/github-preview.png" alt="OI Laravel TypeScript Generator" width="100%" />
 
-# OI Laravel Attachments
+# OI Laravel Attachments BETA
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/oi-lab/oi-laravel-attachments.svg)](https://packagist.org/packages/oi-lab/oi-laravel-attachments)
 [![Total Downloads](https://img.shields.io/packagist/dt/oi-lab/oi-laravel-attachments.svg)](https://packagist.org/packages/oi-lab/oi-laravel-attachments)
@@ -247,6 +247,13 @@ Each action dispatches a Laravel event you can listen to. All events live in `Oi
 | `FileDetached` | One or more attachments are removed |
 | `AttachmentsSynced` | A collection is replaced via `syncAttachments()` |
 | `AttachmentsReordered` | Attachments are reordered |
+| `AttachmentCreated` / `AttachmentUpdated` / `AttachmentDeleted` | Model-level attachment lifecycle |
+| `FileCreated` / `FileUpdated` / `FileDeleted` | A file record is created, updated, or soft deleted |
+| `FileMoved` | A file is moved to a different folder |
+| `FileRestored` | A soft-deleted file is restored |
+| `FolderCreated` / `FolderUpdated` / `FolderDeleted` | A folder is created, updated, or soft deleted |
+| `FolderMoved` | A folder is moved to a different parent |
+| `FolderRestored` | A soft-deleted folder is restored |
 
 ```php
 use Illuminate\Support\Facades\Event;
@@ -273,7 +280,7 @@ All three tables carry a unique `uuid`, `created_by` / `updated_by` audit column
 
 ## Testing
 
-This package ships **56 tests** covering the attachment trait, models and relationships, sorting, upload actions, file metadata, audit tracking, and events.
+This package ships **71 tests** covering the attachment trait, models and relationships, sorting, upload actions, file metadata, audit tracking, and events.
 
 ```bash
 # Run all tests
