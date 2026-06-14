@@ -1,0 +1,69 @@
+{
+    "name": "oi-lab/oi-laravel-attachments",
+    "description": "Polymorphic file attachments, files and folders for Laravel applications",
+    "type": "library",
+    "version": "1.0.0",
+    "keywords": [
+        "laravel",
+        "attachments",
+        "files",
+        "folders",
+        "media",
+        "uploads",
+        "polymorphic"
+    ],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "OI Lab",
+            "email": "olivier@olacombe.com"
+        }
+    ],
+    "require": {
+        "php": "^8.2",
+        "illuminate/contracts": "^11.0|^12.0|^13.0",
+        "illuminate/database": "^11.0|^12.0|^13.0",
+        "illuminate/http": "^11.0|^12.0|^13.0",
+        "illuminate/support": "^11.0|^12.0|^13.0",
+        "league/flysystem": "^3.0"
+    },
+    "require-dev": {
+        "laravel/pint": "^1.29",
+        "orchestra/testbench": "^9.0|^10.0|^11.0",
+        "pestphp/pest": "^3.0|^4.0",
+        "pestphp/pest-plugin-laravel": "^3.0|^4.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "OiLab\\OiLaravelAttachments\\": "src/",
+            "OiLab\\OiLaravelAttachments\\Database\\Factories\\": "database/factories/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "OiLab\\OiLaravelAttachments\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "OiLab\\OiLaravelAttachments\\OiLaravelAttachmentsServiceProvider"
+            ]
+        }
+    },
+    "scripts": {
+        "sync-ai-skills": [
+            "@php scripts/sync-ai-skills.php"
+        ],
+        "post-autoload-dump": [
+            "@php scripts/sync-ai-skills.php"
+        ]
+    },
+    "minimum-stability": "stable",
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
+    }
+}

@@ -1,0 +1,7 @@
+{
+    "type": "package",
+    "name": "oi-lab/oi-laravel-attachments",
+    "title": "OI Laravel Attachments",
+    "description": "Polymorphic file attachments, files and folders for Laravel",
+    "order": 20
+}
