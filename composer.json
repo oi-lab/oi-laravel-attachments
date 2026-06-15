@@ -2,7 +2,6 @@
     "name": "oi-lab/oi-laravel-attachments",
     "description": "Polymorphic file attachments, files and folders for Laravel applications",
     "type": "library",
-    "version": "1.0.0",
     "keywords": [
         "laravel",
         "attachments",
