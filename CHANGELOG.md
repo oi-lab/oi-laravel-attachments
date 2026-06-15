@@ -2,6 +2,11 @@
 
 All notable changes to `oi-laravel-attachments` will be documented in this file.
 
+## [Unreleased]
+
+### Changed
+- **AI Assistant Skills**: The skill install command was renamed to `oi-attachments:install-ai-skill` and is now **deprecated** in favor of the unified `php artisan oi:skills` command (provided by `oi-lab/oi-laravel-development`), which discovers and installs skills from all installed `oi-lab/*` packages via an interactive picker.
+
 ## [1.0.0] - 2026-06-14
 
 Initial release of OI Laravel Attachments — polymorphic file attachments, files, and folders for Laravel applications.

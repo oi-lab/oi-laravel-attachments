@@ -24,7 +24,7 @@ afterEach(function () {
 });
 
 it('installs the skill files for Claude and Junie', function () {
-    $this->artisan('oi:install-ai-skill')->assertSuccessful();
+    $this->artisan('oi-attachments:install-ai-skill')->assertSuccessful();
 
     expect(file_exists($this->base.'/.claude/skills/oilab-laravel-attachments/SKILL.md'))->toBeTrue()
         ->and(file_exists($this->base.'/.junie/skills/oilab-laravel-attachments/SKILL.md'))->toBeTrue()
@@ -33,7 +33,7 @@ it('installs the skill files for Claude and Junie', function () {
 });
 
 it('creates a CLAUDE.md with the rules section when none exists', function () {
-    $this->artisan('oi:install-ai-skill')->assertSuccessful();
+    $this->artisan('oi-attachments:install-ai-skill')->assertSuccessful();
 
     $claude = file_get_contents($this->base.'/CLAUDE.md');
 
@@ -44,7 +44,7 @@ it('creates a CLAUDE.md with the rules section when none exists', function () {
 it('appends the rules section to an existing CLAUDE.md without losing content', function () {
     file_put_contents($this->base.'/CLAUDE.md', "# Existing project rules\n");
 
-    $this->artisan('oi:install-ai-skill')->assertSuccessful();
+    $this->artisan('oi-attachments:install-ai-skill')->assertSuccessful();
 
     $claude = file_get_contents($this->base.'/CLAUDE.md');
 
@@ -53,8 +53,8 @@ it('appends the rules section to an existing CLAUDE.md without losing content', 
 });
 
 it('does not duplicate the rules section when run twice', function () {
-    $this->artisan('oi:install-ai-skill')->assertSuccessful();
-    $this->artisan('oi:install-ai-skill')->assertSuccessful();
+    $this->artisan('oi-attachments:install-ai-skill')->assertSuccessful();
+    $this->artisan('oi-attachments:install-ai-skill')->assertSuccessful();
 
     $claude = file_get_contents($this->base.'/CLAUDE.md');
 

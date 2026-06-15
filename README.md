@@ -299,7 +299,7 @@ vendor/bin/pest --coverage
 This package ships a skill file that gives AI coding assistants (Claude Code, JetBrains Junie) context about how attachments work. Install it into your application with the Artisan command:
 
 ```bash
-php artisan oi:install-ai-skill
+php artisan oi:skills
 ```
 
 This writes `.claude/skills/oilab-laravel-attachments/SKILL.md` and `.junie/skills/oilab-laravel-attachments/SKILL.md`, and adds an `oi-lab/oi-laravel-attachments` rules section to your project's `CLAUDE.md`. See the [documentation](docs/advanced/skills.md) for details.

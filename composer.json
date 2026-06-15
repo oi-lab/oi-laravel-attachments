@@ -49,6 +49,17 @@
             "providers": [
                 "OiLab\\OiLaravelAttachments\\OiLaravelAttachmentsServiceProvider"
             ]
+        },
+        "oi-lab": {
+            "skills": [
+                {
+                    "name": "oilab-laravel-attachments",
+                    "description": "Attach and manage files on Eloquent models",
+                    "path": "resources/stubs/ai-skill.md",
+                    "rules": "resources/stubs/claude-rules.md",
+                    "section": "oi-lab/oi-laravel-attachments rules"
+                }
+            ]
         }
     },
     "scripts": {

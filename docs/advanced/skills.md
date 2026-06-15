@@ -13,10 +13,18 @@ The package ships a canonical skill file that communicates this context, plus an
 
 ## Installing the skill
 
-Run the Artisan command once after adding the package:
+The recommended way to install skills is the unified `oi:skills` command (provided by `oi-lab/oi-laravel-development`). It discovers the skills declared by every installed `oi-lab/*` package and lets you pick which ones to install through an interactive multiselect picker, with a choice of project (`.claude` + `.junie`) or global (`~/.claude`) scope:
 
 ```bash
-php artisan oi:install-ai-skill
+php artisan oi:skills
+```
+
+To install only this package's skill non-interactively, pass its name and a scope:
+
+```bash
+php artisan oi:skills oilab-laravel-attachments --project
+# or, for the global ~/.claude scope:
+php artisan oi:skills oilab-laravel-attachments --global
 ```
 
 This copies the canonical stub at `resources/stubs/ai-skill.md` to:
@@ -26,6 +34,8 @@ This copies the canonical stub at `resources/stubs/ai-skill.md` to:
 
 It also adds an `=== oi-lab/oi-laravel-attachments rules ===` section to your project's `CLAUDE.md` (creating the file if needed). Re-running the command refreshes that section in place rather than duplicating it.
 
+> A package-local command `php artisan oi-attachments:install-ai-skill` is still available for projects that don't use `oi-lab/oi-laravel-development`, but it is **deprecated** in favor of `oi:skills`.
+
 ### Keeping it up to date automatically
 
 To refresh the skill whenever the package is updated, add the command to your application's `composer.json`:
@@ -33,10 +43,12 @@ To refresh the skill whenever the package is updated, add the command to your ap
 ```json
 "scripts": {
     "post-autoload-dump": [
-        "@php artisan oi:install-ai-skill --quiet"
+        "@php artisan oi:skills oilab-laravel-attachments --project --quiet"
     ]
 }
 ```
+
+> This requires the `oi-lab/oi-laravel-development` package, which provides the `oi:skills` command.
 
 ### Publishing only the skill file
 
@@ -46,7 +58,7 @@ If you only want the skill file without touching `CLAUDE.md`, publish it via the
 php artisan vendor:publish --tag=oi-laravel-attachments-skill
 ```
 
-> Note: `composer sync-ai-skills` is a **package-development** helper that syncs the stub into this package's own `.claude` / `.junie` directories. It must be run from inside the package repository — consuming applications should use `php artisan oi:install-ai-skill` instead.
+> Note: `composer sync-ai-skills` is a **package-development** helper that syncs the stub into this package's own `.claude` / `.junie` directories. It must be run from inside the package repository — consuming applications should use `php artisan oi:skills` instead.
 
 ## What the skill tells the assistant
 
@@ -59,4 +71,4 @@ The skill file instructs the assistant to:
 
 ## Customizing the skill
 
-The source of truth is `resources/stubs/ai-skill.md`. Edit it and re-run `php artisan oi:install-ai-skill` to propagate changes to both assistant directories. The generated `SKILL.md` files are overwritten on each run, so make your edits in the stub, not the targets.
+The source of truth is `resources/stubs/ai-skill.md`. Edit it and re-run `php artisan oi:skills` to propagate changes to both assistant directories. The generated `SKILL.md` files are overwritten on each run, so make your edits in the stub, not the targets.

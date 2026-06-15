@@ -106,5 +106,5 @@ Note: a sync of N files also fires N `FileAttached` events; `AttachUploadedFiles
 After updating this package, re-install the skill files:
 
 ```bash
-php artisan oi:install-ai-skill
+php artisan oi:skills
 ```
