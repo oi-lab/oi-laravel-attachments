@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Storage;
 use League\Flysystem\Local\LocalFilesystemAdapter;
 use OiLab\OiLaravelAttachments\Casts\FileMetadataCast;
 use OiLab\OiLaravelAttachments\Concerns\HasCreatorAndUpdater;
+use OiLab\OiLaravelAttachments\Data\FileData;
 use OiLab\OiLaravelAttachments\Database\Factories\FileFactory;
 use OiLab\OiLaravelAttachments\Observers\FileObserver;
 use OiLab\OiLaravelAttachments\OiLaravelAttachments;
@@ -159,6 +160,17 @@ class File extends Model
     public function getStream()
     {
         return Storage::disk($this->storage)->readStream($this->filename_disk);
+    }
+
+    /**
+     * Get a data transfer object representing this file.
+     */
+    public function toData(): FileData
+    {
+        return FileData::from([
+            ...$this->toArray(),
+            'metadata' => $this->metadata->toArray(),
+        ]);
     }
 
     /**

@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Support\Carbon;
 use OiLab\OiLaravelAttachments\Concerns\HasCreatorAndUpdater;
 use OiLab\OiLaravelAttachments\Concerns\HasSortable;
+use OiLab\OiLaravelAttachments\Data\AttachmentData;
 use OiLab\OiLaravelAttachments\Database\Factories\AttachmentFactory;
 use OiLab\OiLaravelAttachments\Observers\AttachmentObserver;
 use OiLab\OiLaravelAttachments\OiLaravelAttachments;
@@ -86,6 +87,19 @@ class Attachment extends Model
     public function attachable(): MorphTo
     {
         return $this->morphTo();
+    }
+
+    /**
+     * Get a data transfer object representing this attachment.
+     */
+    public function toData(): AttachmentData
+    {
+        return AttachmentData::from([
+            ...$this->toArray(),
+            'file' => $this->relationLoaded('file') && $this->file !== null
+                ? $this->file->toData()
+                : null,
+        ]);
     }
 
     /**

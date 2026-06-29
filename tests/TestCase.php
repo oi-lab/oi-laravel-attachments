@@ -6,6 +6,7 @@ use Illuminate\Foundation\Application;
 use OiLab\OiLaravelAttachments\OiLaravelAttachmentsServiceProvider;
 use OiLab\OiLaravelAttachments\Tests\Fixtures\User;
 use Orchestra\Testbench\TestCase as Orchestra;
+use Spatie\LaravelData\LaravelDataServiceProvider;
 
 abstract class TestCase extends Orchestra
 {
@@ -16,6 +17,7 @@ abstract class TestCase extends Orchestra
     protected function getPackageProviders($app): array
     {
         return [
+            LaravelDataServiceProvider::class,
             OiLaravelAttachmentsServiceProvider::class,
         ];
     }

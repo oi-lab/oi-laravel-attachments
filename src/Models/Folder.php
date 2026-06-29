@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use OiLab\OiLaravelAttachments\Concerns\HasCreatorAndUpdater;
+use OiLab\OiLaravelAttachments\Data\FolderData;
 use OiLab\OiLaravelAttachments\Database\Factories\FolderFactory;
 use OiLab\OiLaravelAttachments\Observers\FolderObserver;
 use OiLab\OiLaravelAttachments\OiLaravelAttachments;
@@ -73,6 +74,14 @@ class Folder extends Model
     public function files(): HasMany
     {
         return $this->hasMany(OiLaravelAttachments::fileModel());
+    }
+
+    /**
+     * Get a data transfer object representing this folder.
+     */
+    public function toData(): FolderData
+    {
+        return FolderData::from($this->toArray());
     }
 
     /**
